@@ -25,7 +25,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    //bool isloading = false;
     Size size = MediaQuery.of(context).size;
     var auth = Provider.of<AuthendicationProvider>(context, listen: false);
     return DefaultTabController(
@@ -99,23 +98,15 @@ class _HomePageState extends State<HomePage> {
                     child: FutureBuilder<DatabaseEvent>(
                         future: FirebaseDatabase.instance.ref('user').once(),
                         builder: (context, snapshot) {
-                         
-                          List usrdata = snapshot.data!.snapshot.children
-                              .map((e) => e.value)
-                              .toList();
-                          print("IDA-->${usrdata[1]["email_id"]}");
+                          
                           return Column(
                             children: [
                               const CircleAvatar(
                                   radius: 40,
                                   backgroundColor: Colors.white,
                                   child: Icon(Icons.image)),
-                              auth.user?.displayName != null
-                                  ? Text("${auth.user?.displayName}")
-                                  : Text("${auth.mobileuser?.phoneNumber}"),
-                              auth.user!.displayName != null
-                                  ? Text("${auth.user1?.uid}")
-                                  : Text("${auth.mobileuser?.uid}")
+                              Text("${auth.user?.displayName}"),
+                              Text("${auth.user1?.uid}")
                             ],
                           );
                         })),
